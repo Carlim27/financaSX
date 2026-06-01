@@ -49,6 +49,8 @@ despesas e acompanhar sua saúde financeira de forma simples e visual.
 - Gráfico financeiro em tempo real
 - Persistência de dados usando LocalStorage
 - Interface totalmente responsiva
+
+---
 # 🚀 Tecnologias usadas
 
 - HTML5
