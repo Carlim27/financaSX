@@ -4,8 +4,6 @@ Sistema financeiro moderno feito com HTML, CSS e JavaScript puro.
 
 Sem framework.  
 Sem backend.  
-Sem 4 mil dependências instaladas para mudar a cor de um botão.  
-Uma raridade arqueológica da programação moderna.
 
 ---
 
@@ -37,10 +35,20 @@ O sistema possui:
 
 Tudo isso usando apenas front-end.
 
-Milagres ocasionais ainda acontecem.
+---
+# 🎯 Objetivo
+
+O FinançaSX foi criado para ajudar usuários a controlar receitas,
+despesas e acompanhar sua saúde financeira de forma simples e visual.
 
 ---
+# 🌟 Diferenciais
 
+- Tema automático baseado no horário do sistema
+- Fundo animado com partículas
+- Gráfico financeiro em tempo real
+- Persistência de dados usando LocalStorage
+- Interface totalmente responsiva
 # 🚀 Tecnologias usadas
 
 - HTML5
