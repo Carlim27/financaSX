@@ -1,599 +1,335 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>FinançaSX</title>
+    <meta charset="UTF-8">
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
+    <title>FinançaSX</title>
 
-:root{
-  --bg:#0b1220;
-  --card:#111a2e;
-  --accent:#38bdf8;
-  --text:#e5e7eb;
-  --green:#22c55e;
-  --red:#ef4444;
-}
+    <!-- CSS -->
+    <link rel="stylesheet" href="17style.css">
 
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:Arial;
-}
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
-body{
-  background:var(--bg);
-  color:var(--text);
-  overflow-x:hidden;
-  transition:.3s;
-}
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-/* FUNDO */
-canvas#bg{
-  position:fixed;
-  top:0;
-  left:0;
-  z-index:0;
-  pointer-events:none;
-}
-
-.container{
-  position:relative;
-  z-index:1;
-  max-width:1100px;
-  margin:auto;
-  padding:30px 20px;
-}
-
-/* HEADER */
-
-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:20px;
-}
-
-header h1{
-  color:var(--accent);
-}
-
-#icon{
-  font-size:30px;
-}
-
-/* CARDS */
-
-.cards{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:15px;
-}
-
-.card{
-  background:var(--card);
-  padding:20px;
-  border-radius:14px;
-  transition:.2s;
-}
-
-.card:hover{
-  transform:translateY(-5px);
-}
-
-.value{
-  font-size:22px;
-  margin-top:10px;
-}
-
-.green{
-  color:var(--green);
-}
-
-.red{
-  color:var(--red);
-}
-
-/* FORM */
-
-.form{
-  margin-top:20px;
-  background:var(--card);
-  padding:20px;
-  border-radius:14px;
-  display:grid;
-  gap:10px;
-}
-
-input,
-select,
-button{
-  padding:12px;
-  border:none;
-  border-radius:10px;
-}
-
-input,
-select{
-  background:#0f172a;
-  color:white;
-}
-
-button{
-  background:var(--accent);
-  color:white;
-  cursor:pointer;
-  font-weight:bold;
-  transition:.2s;
-}
-
-button:hover{
-  opacity:.9;
-}
-
-/* LISTA */
-
-.item{
-  background:var(--card);
-  margin-top:10px;
-  padding:15px;
-  border-radius:12px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-
-.small{
-  opacity:.6;
-  font-size:12px;
-}
-
-/* ALERTAS */
-
-.alert{
-  margin-top:10px;
-  padding:10px;
-  border-radius:10px;
-}
-
-.redA{
-  background:#7f1d1d;
-}
-
-.yellowA{
-  background:#78350f;
-}
-
-/* GRÁFICO */
-
-canvas.chart{
-  margin-top:20px;
-  background:var(--card);
-  padding:15px;
-  border-radius:14px;
-}
-
-#chart{
-  margin-top:20px;
-  background:var(--card);
-  padding:20px;
-  border-radius:14px;
-}
-
-</style>
 </head>
 
 <body>
 
-<canvas id="bg"></canvas>
-
-<div class="container">
-
 <header>
-  <h1>FinançaSX</h1>
-  <div id="icon">💸</div>
+
+    <div class="logo">
+
+        <i class="fa-solid fa-wallet"></i>
+
+        <h1>FinançaSX</h1>
+
+    </div>
+
+    <p>Controle suas finanças de forma simples e inteligente.</p>
+
 </header>
 
-<div class="cards">
+<main class="container">
 
-  <div class="card">
-    <div>SALDO</div>
-    <div class="value" id="saldo">R$ 0</div>
-  </div>
+    <!-- RESUMO -->
 
-  <div class="card">
-    <div>ENTRADAS</div>
-    <div class="value green" id="entradas">R$ 0</div>
-  </div>
+    <section class="cards">
 
-  <div class="card">
-    <div>SAÍDAS</div>
-    <div class="value red" id="saidas">R$ 0</div>
-  </div>
+        <div class="card saldo">
 
-</div>
+            <h3>
 
-<div id="alert"></div>
+                <i class="fa-solid fa-coins"></i>
 
-<div class="form">
+                Saldo
 
-  <input id="desc" placeholder="Descrição">
+            </h3>
 
-  <input
-    id="valor"
-    type="number"
-    min="0"
-    placeholder="Valor"
-  >
+            <h2 id="saldo">R$ 0,00</h2>
 
-  <select id="tipo">
-    <option value="entrada">Entrada</option>
-    <option value="saida">Saída</option>
-  </select>
+        </div>
 
-  <select id="cat">
-    <option>Geral</option>
-    <option>Alimentação</option>
-    <option>Transporte</option>
-    <option>Lazer</option>
-    <option>Saúde</option>
-  </select>
+        <div class="card entrada">
 
-  <button onclick="add()">
-    Adicionar
-  </button>
+            <h3>
 
-</div>
+                <i class="fa-solid fa-arrow-trend-up"></i>
 
-<div id="list"></div>
+                Entradas
 
-<canvas id="chart"></canvas>
+            </h3>
 
-</div>
+            <h2 id="entradas">R$ 0,00</h2>
 
-<script>
+        </div>
 
-/* ================= DADOS ================= */
+        <div class="card saida">
 
-let data = [];
-localStorage.removeItem("fxUltra");
+            <h3>
 
-let chart;
+                <i class="fa-solid fa-arrow-trend-down"></i>
 
-/* ================= FORMATAR ================= */
+                Saídas
 
-function format(v){
+            </h3>
 
-  return v.toLocaleString(
-    "pt-BR",
-    {
-      style:"currency",
-      currency:"BRL"
-    }
-  );
+            <h2 id="saidas">R$ 0,00</h2>
 
-}
+        </div>
 
-/* ================= ADICIONAR ================= */
+    </section>
 
-function add(){
+    <!-- FORMULÁRIO -->
 
-  let d =
-  document.getElementById("desc").value;
+    <section class="formulario">
 
-  let v =
-  parseFloat(
-    document.getElementById("valor").value
-  );
+        <h2>
 
-  let t =
-  document.getElementById("tipo").value;
+            Nova Transação
 
-  let c =
-  document.getElementById("cat").value;
+        </h2>
 
-  if(!d || isNaN(v) || v < 0){
-    return;
-  }
+        <div class="grid">
 
-  data.push({
-    d,
-    v,
-    t,
-    c
-  });
+            <input
+                type="text"
+                id="desc"
+                placeholder="Descrição da transação">
 
-  save();
-  update();
+            <input
+                type="number"
+                id="valor"
+                placeholder="Valor">
 
-  document.getElementById("desc").value="";
-  document.getElementById("valor").value="";
+            <input
+                type="date"
+                id="data">
 
-}
+            <select id="categoria">
 
-/* ================= SALVAR ================= */
+                <option value="Salário">Salário</option>
 
-function save(){
+                <option value="Alimentação">Alimentação</option>
 
-  localStorage.setItem(
-    "fxUltra",
-    JSON.stringify(data)
-  );
+                <option value="Transporte">Transporte</option>
 
-}
+                <option value="Moradia">Moradia</option>
 
-/* ================= UPDATE ================= */
+                <option value="Saúde">Saúde</option>
 
-function update(){
+                <option value="Educação">Educação</option>
 
-  let e = 0;
-  let s = 0;
+                <option value="Lazer">Lazer</option>
 
-  let list =
-  document.getElementById("list");
+                <option value="Outros">Outros</option>
 
-  list.innerHTML = "";
+            </select>
 
-  data.forEach(x=>{
+            <select id="tipo">
 
-    if(x.t==="entrada"){
-      e += x.v;
-    }else{
-      s += x.v;
-    }
+                <option value="entrada">
 
-    let div =
-    document.createElement("div");
+                    Entrada
 
-    div.className="item";
+                </option>
 
-    div.innerHTML = `
-      <div>
-        <strong>${x.d}</strong>
-        <div class="small">${x.c}</div>
-      </div>
+                <option value="saida">
 
-      <div>
-        ${format(x.v)}
-      </div>
-    `;
+                    Saída
 
-    list.appendChild(div);
+                </option>
 
-  });
+            </select>
 
-  let saldo = e - s;
+            <button id="btnAdicionar">
 
-  document.getElementById("saldo")
-  .innerText = format(saldo);
+                <i class="fa-solid fa-plus"></i>
 
-  document.getElementById("entradas")
-  .innerText = format(e);
+                Adicionar Transação
 
-  document.getElementById("saidas")
-  .innerText = format(s);
+            </button>
 
-  let alert =
-  document.getElementById("alert");
+        </div>
 
-  alert.innerHTML = "";
+    </section>
+        <!-- PESQUISA E FILTROS -->
 
-  if(saldo < 0){
+    <section class="painel">
 
-    alert.innerHTML = `
-      <div class="alert redA">
-        ⚠ Saldo negativo
-      </div>
-    `;
+        <div class="pesquisa">
 
-  }
+            <i class="fa-solid fa-magnifying-glass"></i>
 
-  else if(saldo < 100){
+            <input
+                type="text"
+                id="pesquisa"
+                placeholder="Pesquisar transação...">
 
-    alert.innerHTML = `
-      <div class="alert yellowA">
-        ⚠ Saldo baixo
-      </div>
-    `;
+        </div>
 
-  }
+        <div class="filtros">
 
-  if(chart){
-    chart.destroy();
-  }
+            <button class="btnFiltro ativo" data-filter="all">
 
-  chart = new Chart(
-    document.getElementById("chart"),
-    {
-      type:"doughnut",
+                Todas
 
-      data:{
-        labels:[
-          "Entradas",
-          "Saídas"
-        ],
+            </button>
 
-        datasets:[
-          {
-            data:[e,s]
-          }
-        ]
-      }
-    }
-  );
+            <button class="btnFiltro" data-filter="entrada">
 
-  save();
+                Entradas
 
-}
+            </button>
 
-/* ================= TEMA AUTOMÁTICO ================= */
+            <button class="btnFiltro" data-filter="saida">
 
-function applyTheme(){
+                Saídas
 
-  const root =
-  document.documentElement;
+            </button>
 
-  const icon =
-  document.getElementById("icon");
+        </div>
 
-  const hour =
-  new Date().getHours();
+    </section>
 
-  if(hour >= 18 || hour < 6){
+    <!-- ESTATÍSTICAS -->
 
-    icon.innerText="🌙";
+    <section class="estatisticas">
 
-    root.style.setProperty(
-      "--bg",
-      "#070a12"
-    );
+        <div class="box">
 
-    root.style.setProperty(
-      "--card",
-      "#111827"
-    );
+            <h3>Total de Transações</h3>
 
-    root.style.setProperty(
-      "--accent",
-      "#818cf8"
-    );
+            <span id="totalRegistros">0</span>
 
-  }else{
+        </div>
 
-    icon.innerText="☀️";
+        <div class="box">
 
-    root.style.setProperty(
-      "--bg",
-      "#0b1220"
-    );
+            <h3>Maior Entrada</h3>
 
-    root.style.setProperty(
-      "--card",
-      "#111a2e"
-    );
+            <span id="maiorEntrada">R$ 0,00</span>
 
-    root.style.setProperty(
-      "--accent",
-      "#38bdf8"
-    );
+        </div>
 
-  }
+        <div class="box">
 
-}
+            <h3>Maior Saída</h3>
 
-applyTheme();
+            <span id="maiorSaida">R$ 0,00</span>
 
-/* ================= PARTICLES ================= */
+        </div>
 
-const canvas =
-document.getElementById("bg");
+    </section>
 
-const ctx =
-canvas.getContext("2d");
+    <!-- LISTA -->
 
-canvas.width = innerWidth;
-canvas.height = innerHeight;
+    <section class="listaTransacoes">
 
-let p = [];
+        <div class="tituloLista">
 
-for(let i=0;i<80;i++){
+            <h2>
 
-  p.push({
+                <i class="fa-solid fa-list"></i>
 
-    x:Math.random()*canvas.width,
-    y:Math.random()*canvas.height,
+                Histórico de Transações
 
-    vx:0,
-    vy:0
+            </h2>
 
-  });
+            <button id="limparTudo">
 
-}
+                <i class="fa-solid fa-trash"></i>
 
-document.addEventListener(
-  "mousemove",
-  e=>{
+                Limpar Tudo
 
-    p.forEach(o=>{
+            </button>
 
-      let dx =
-      o.x - e.clientX;
+        </div>
 
-      let dy =
-      o.y - e.clientY;
+        <div id="lista">
 
-      let d =
-      Math.sqrt(dx*dx + dy*dy);
+            <!-- As transações aparecerão aqui -->
 
-      if(d < 120){
+        </div>
 
-        o.vx += dx/d;
-        o.vy += dy/d;
+    </section>
 
-      }
+    <!-- GRÁFICOS -->
 
-    });
+    <section class="graficos">
 
-  }
-);
+        <div class="grafico">
 
-function anim(){
+            <h2>
 
-  ctx.clearRect(
-    0,
-    0,
-    canvas.width,
-    canvas.height
-  );
+                <i class="fa-solid fa-chart-pie"></i>
 
-  p.forEach(o=>{
+                Entradas x Saídas
 
-    o.x += o.vx;
-    o.y += o.vy;
+            </h2>
 
-    o.vx *= 0.92;
-    o.vy *= 0.92;
+            <canvas id="grafico"></canvas>
 
-    ctx.fillStyle =
-    "#38bdf8";
+        </div>
 
-    ctx.fillRect(
-      o.x,
-      o.y,
-      2,
-      2
-    );
+    </section>
+    </main>
 
-  });
+<footer>
 
-  requestAnimationFrame(anim);
+    <div class="footer-content">
 
-}
+        <h2>
 
-anim();
+            <i class="fa-solid fa-wallet"></i>
 
-/* ================= RESPONSIVO ================= */
+            FinançaSX
 
-window.addEventListener(
-  "resize",
-  ()=>{
+        </h2>
 
-    canvas.width = innerWidth;
-    canvas.height = innerHeight;
+        <p>
+            Organize suas finanças de maneira simples, rápida e segura.
+        </p>
 
-  }
-);
+        <div class="footer-info">
 
-/* ================= INIT ================= */
+            <span>
+                <i class="fa-solid fa-chart-line"></i>
+                Controle Financeiro
+            </span>
 
-update();
+            <span>
+                <i class="fa-solid fa-shield-halved"></i>
+                Dados salvos no navegador
+            </span>
 
-</script>
+            <span>
+                <i class="fa-solid fa-code"></i>
+                HTML • CSS • JavaScript
+            </span>
+
+        </div>
+
+    </div>
+
+    <p class="copyright">
+
+        © 2026 FinançaSX - Todos os direitos reservados.
+
+    </p>
+
+</footer>
+
+<!-- JavaScript -->
+<script src="carlmi.js"></script>
 
 </body>
+
 </html>
