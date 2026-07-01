@@ -1,0 +1,284 @@
+/* =========================
+   RESET GERAL
+========================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: #0f172a;
+    color: #e2e8f0;
+    line-height: 1.6;
+}
+
+/* =========================
+   HEADER
+========================= */
+header {
+    text-align: center;
+    padding: 30px 20px;
+    background: #111827;
+    border-bottom: 1px solid #1f2937;
+}
+
+header .logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+header i {
+    color: #38bdf8;
+}
+
+header p {
+    margin-top: 8px;
+    color: #94a3b8;
+}
+
+/* =========================
+   CONTAINER
+========================= */
+.container {
+    width: 95%;
+    max-width: 1100px;
+    margin: 20px auto;
+}
+
+/* =========================
+   CARDS
+========================= */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.card {
+    background: #1e293b;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card h3 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1rem;
+    color: #cbd5e1;
+}
+
+.card h2 {
+    margin-top: 10px;
+    font-size: 1.6rem;
+}
+
+/* cores dos cards */
+.saldo { border-left: 5px solid #38bdf8; }
+.entrada { border-left: 5px solid #22c55e; }
+.saida { border-left: 5px solid #ef4444; }
+
+/* =========================
+   FORMULÁRIO
+========================= */
+.formulario {
+    background: #1e293b;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+.formulario h2 {
+    margin-bottom: 15px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 10px;
+}
+
+input, select {
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    background: #0f172a;
+    color: #e2e8f0;
+}
+
+button {
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background: #38bdf8;
+    color: #0f172a;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #0ea5e9;
+}
+
+/* =========================
+   PAINEL (PESQUISA + FILTROS)
+========================= */
+.painel {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.pesquisa {
+    display: flex;
+    align-items: center;
+    background: #1e293b;
+    padding: 10px;
+    border-radius: 8px;
+    flex: 1;
+}
+
+.pesquisa input {
+    flex: 1;
+    margin-left: 10px;
+    background: transparent;
+}
+
+.filtros {
+    display: flex;
+    gap: 10px;
+}
+
+.btnFiltro {
+    background: #334155;
+    color: #e2e8f0;
+}
+
+.btnFiltro.ativo {
+    background: #38bdf8;
+    color: #0f172a;
+}
+
+/* =========================
+   ESTATÍSTICAS
+========================= */
+.estatisticas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.box {
+    background: #1e293b;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.box h3 {
+    font-size: 0.9rem;
+    color: #94a3b8;
+}
+
+/* =========================
+   LISTA
+========================= */
+.listaTransacoes {
+    background: #1e293b;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+.tituloLista {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+#lista {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.transacao {
+    background: #0f172a;
+    padding: 12px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-left: 4px solid #38bdf8;
+}
+
+/* =========================
+   GRÁFICOS
+========================= */
+.graficos {
+    background: #1e293b;
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.grafico {
+    text-align: center;
+}
+
+/* =========================
+   FOOTER
+========================= */
+footer {
+    text-align: center;
+    padding: 30px 20px;
+    background: #111827;
+    margin-top: 20px;
+}
+
+.footer-info {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin: 10px 0;
+    color: #94a3b8;
+    font-size: 0.9rem;
+}
+
+.copyright {
+    margin-top: 10px;
+    color: #64748b;
+}
+
+/* =========================
+   RESPONSIVO
+========================= */
+@media (max-width: 600px) {
+    .painel {
+        flex-direction: column;
+    }
+
+    .tituloLista {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
